@@ -7,6 +7,7 @@ import SkillsSection from "@/components/SkillsSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import CursorGlow from "@/components/CursorGlow";
 
 const Index = () => {
   return (
@@ -24,6 +25,7 @@ const Index = () => {
         <link rel="canonical" href="https://mahimakumar.com" />
       </Helmet>
 
+      <CursorGlow />
       <main className="bg-background text-foreground overflow-x-hidden">
         <Navigation />
         <HeroSection />

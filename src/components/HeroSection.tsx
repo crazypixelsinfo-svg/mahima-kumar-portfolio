@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Mail } from "lucide-react";
+import { ArrowDown, Mail, Download } from "lucide-react";
 
 const HeroSection = () => {
   return (
@@ -47,6 +47,19 @@ const HeroSection = () => {
             <a href="#contact">
               <Mail className="mr-2 h-4 w-4" />
               Contact Me
+            </a>
+          </Button>
+        </div>
+
+        {/* Download Resume Button */}
+        <div 
+          className="mt-6 opacity-0 animate-fade-up"
+          style={{ animationDelay: "1s" }}
+        >
+          <Button variant="glow" size="lg" asChild>
+            <a href="/BMK_resume.pdf" download="Mahima_Kumar_Resume.pdf">
+              <Download className="mr-2 h-4 w-4" />
+              Download Resume
             </a>
           </Button>
         </div>

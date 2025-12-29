@@ -1,10 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone, MapPin, Linkedin, ExternalLink, Mail } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Phone, MapPin, Linkedin, Send, CheckCircle, AlertCircle } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const sectionRef = useRef<HTMLElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const { toast } = useToast();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -22,6 +30,44 @@ const ContactSection = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mabcdxyz", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        toast({
+          title: "Message Sent",
+          description: "Thank you! Your message has been sent.",
+        });
+        formRef.current?.reset();
+      } else {
+        throw new Error("Failed to submit");
+      }
+    } catch {
+      setSubmitStatus("error");
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const contactInfo = [
     {
@@ -92,20 +138,85 @@ const ContactSection = () => {
           })}
         </div>
 
+        {/* Contact Form */}
         <div 
-          className={`text-center transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
         >
-          <Button variant="glow" size="xl" asChild>
-            <a 
-              href="https://www.linkedin.com/in/bellamkonda-mahima-kumar"
-              target="_blank"
-              rel="noopener noreferrer"
+          <form 
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="bg-secondary/20 border border-border rounded-2xl p-6 md:p-8 space-y-6"
+          >
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="name" className="text-foreground">Full Name</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  placeholder="Your name"
+                  className="bg-background/50 border-border focus:border-primary/50 focus:ring-primary/20 transition-all"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-foreground">Email Address</Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="your@email.com"
+                  className="bg-background/50 border-border focus:border-primary/50 focus:ring-primary/20 transition-all"
+                />
+              </div>
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="message" className="text-foreground">Message</Label>
+              <Textarea
+                id="message"
+                name="message"
+                required
+                placeholder="Tell me about your project..."
+                rows={5}
+                className="bg-background/50 border-border focus:border-primary/50 focus:ring-primary/20 transition-all resize-none"
+              />
+            </div>
+
+            {submitStatus === "success" && (
+              <div className="flex items-center gap-2 text-green-400 bg-green-400/10 border border-green-400/20 rounded-lg p-4">
+                <CheckCircle className="w-5 h-5" />
+                <span>Thank you! Your message has been sent.</span>
+              </div>
+            )}
+
+            {submitStatus === "error" && (
+              <div className="flex items-center gap-2 text-red-400 bg-red-400/10 border border-red-400/20 rounded-lg p-4">
+                <AlertCircle className="w-5 h-5" />
+                <span>Failed to send message. Please try again.</span>
+              </div>
+            )}
+
+            <Button 
+              type="submit" 
+              variant="glow" 
+              size="lg" 
+              className="w-full md:w-auto"
+              disabled={isSubmitting}
             >
-              <Mail className="mr-2 h-5 w-5" />
-              Hire Me
-              <ExternalLink className="ml-2 h-4 w-4" />
-            </a>
-          </Button>
+              {isSubmitting ? (
+                <>
+                  <span className="animate-pulse">Sending...</span>
+                </>
+              ) : (
+                <>
+                  <Send className="mr-2 h-4 w-4" />
+                  Send Message
+                </>
+              )}
+            </Button>
+          </form>
         </div>
       </div>
     </section>
