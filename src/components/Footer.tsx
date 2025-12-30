@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 
 const Footer = () => {
@@ -6,9 +7,9 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
-            <p className="font-display text-xl font-bold text-gradient mb-1">
-              Mahima Kumar
-            </p>
+            <Link to="/" className="font-display text-xl font-bold text-gradient mb-1 inline-block hover:opacity-80 transition-opacity">
+              Bellamkonda Mahima Kumar
+            </Link>
             <p className="text-muted-foreground text-sm">
               Creative Video Editor & Motion Graphics Designer
             </p>
@@ -47,7 +48,7 @@ const Footer = () => {
 
         <div className="mt-8 pt-8 border-t border-border text-center">
           <p className="text-muted-foreground text-xs">
-            2025 Mahima Kumar. All rights reserved.
+            2025 Bellamkonda Mahima Kumar. All rights reserved.
           </p>
         </div>
       </div>
