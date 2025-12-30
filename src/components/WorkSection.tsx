@@ -43,38 +43,53 @@ const ProjectCard = ({ project, index, isVisible }: { project: Project; index: n
     >
       <Dialog>
         <DialogTrigger asChild>
-          <div className="relative group cursor-pointer rounded-xl overflow-hidden glow-border card-hover border border-border">
-            <div className="aspect-video bg-secondary relative overflow-hidden">
+          <div className="relative group cursor-pointer rounded-xl overflow-hidden border border-border card-3d perspective-1000 shimmer-effect">
+            <div className="aspect-video bg-secondary relative overflow-hidden preserve-3d">
               {/* Vimeo Background Preview */}
               <iframe
                 src={`https://player.vimeo.com/video/${project.vimeoId}?background=1&muted=1&loop=1&autopause=0`}
-                className="absolute inset-0 w-full h-full pointer-events-none scale-110 group-hover:scale-125 transition-transform duration-500"
+                className="absolute inset-0 w-full h-full pointer-events-none scale-110 group-hover:scale-125 transition-transform duration-700"
                 allow="autoplay; fullscreen"
                 title={`${project.title} Preview`}
               />
               
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-background/70 group-hover:bg-background/40 transition-all duration-300 flex items-center justify-center">
-                <div className="w-14 h-14 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 opacity-0 group-hover:opacity-100">
-                  <Play className="w-6 h-6 text-primary ml-0.5" />
+              {/* Overlay with 3D depth */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent group-hover:opacity-50 transition-all duration-500">
+                {/* Floating play button with 3D effect */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div 
+                    className="w-14 h-14 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"
+                    style={{
+                      boxShadow: "0 0 30px 10px hsl(var(--primary) / 0.3)",
+                      transform: "translateZ(20px)",
+                    }}
+                  >
+                    <Play className="w-6 h-6 text-primary ml-0.5" />
+                  </div>
                 </div>
               </div>
 
-              {/* Category Badge */}
-              <div className="absolute top-3 left-3">
-                <span className={`text-xs font-medium px-3 py-1 rounded-full border ${getCategoryColor(project.category)}`}>
+              {/* Category Badge with glow */}
+              <div className="absolute top-3 left-3 z-10">
+                <span 
+                  className={`text-xs font-medium px-3 py-1 rounded-full border backdrop-blur-sm ${getCategoryColor(project.category)}`}
+                  style={{ transform: "translateZ(30px)" }}
+                >
                   {project.category}
                 </span>
               </div>
 
-              {/* Title overlay */}
+              {/* Title overlay with depth */}
               <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background via-background/80 to-transparent">
-                <h3 className="font-display text-lg font-semibold">{project.title}</h3>
+                <h3 className="font-display text-lg font-semibold group-hover:glow-text transition-all duration-300">{project.title}</h3>
               </div>
+
+              {/* Corner accent glow */}
+              <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-primary/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
           </div>
         </DialogTrigger>
-        <DialogContent className="max-w-5xl w-full p-0 bg-background border-border">
+        <DialogContent className="max-w-5xl w-full p-0 bg-background border-border animate-slide-in-3d">
           <div className="aspect-video">
             <iframe
               src={`https://player.vimeo.com/video/${project.vimeoId}?autoplay=1`}
@@ -118,12 +133,17 @@ const WorkSection = () => {
     <section 
       ref={sectionRef}
       id="work" 
-      className="section-padding"
+      className="section-padding perspective-1000 relative"
     >
-      <div className="max-w-6xl mx-auto">
+      {/* Section background glow */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl opacity-0 animate-glow-pulse" style={{ animationDelay: "1s" }} />
+      </div>
+
+      <div className="max-w-6xl mx-auto relative">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <p className="text-primary text-sm tracking-[0.3em] uppercase mb-4">Portfolio</p>
-          <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
+          <p className="text-primary text-sm tracking-[0.3em] uppercase mb-4 animate-pulse-glow inline-block" style={{ textShadow: "0 0 20px hsl(var(--primary) / 0.5)" }}>Portfolio</p>
+          <h2 className="font-display text-3xl md:text-5xl font-bold mb-4 animate-text-3d">
             Selected Work
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
