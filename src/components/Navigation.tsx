@@ -17,6 +17,7 @@ const Navigation = () => {
 
   const navLinks = [
     { label: "About", href: "#about" },
+    { label: "Services", href: "#services" },
     { label: "Work", href: "#work" },
     { label: "Skills", href: "#skills" },
     { label: "Experience", href: "#experience" },
@@ -35,7 +36,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="font-display text-xl font-bold text-gradient">
-            MK
+            BMK
           </a>
 
           {/* Desktop Navigation */}

@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
             <p className="font-display text-xl font-bold text-gradient mb-1">
-              Mahima Kumar
+              Bellamkonda Mahima Kumar
             </p>
             <p className="text-muted-foreground text-sm">
               Creative Video Editor & Motion Graphics Designer

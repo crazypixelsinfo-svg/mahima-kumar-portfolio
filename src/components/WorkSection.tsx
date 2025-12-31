@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Play, ExternalLink } from "lucide-react";
+import { Play, ExternalLink, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -92,6 +92,7 @@ const ProjectCard = ({ project, index, isVisible }: { project: Project; index: n
 
 const WorkSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [showAll, setShowAll] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -113,12 +114,14 @@ const WorkSection = () => {
 
   const mainShowreel = projects[0];
   const otherProjects = projects.slice(1);
+  const initialProjects = otherProjects.slice(0, 3);
+  const remainingProjects = otherProjects.slice(3);
 
   return (
     <section 
       ref={sectionRef}
       id="work" 
-      className="section-padding"
+      className="section-padding min-h-screen"
     >
       <div className="max-w-6xl mx-auto">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
@@ -127,7 +130,7 @@ const WorkSection = () => {
             Selected Work
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            A showcase of motion graphics, video editing, and creative projects
+            A showcase of motion graphics, video editing, and creative projects crafted with precision and passion
           </p>
         </div>
 
@@ -179,9 +182,9 @@ const WorkSection = () => {
           </Dialog>
         </div>
 
-        {/* Project Grid */}
+        {/* Initial Project Grid - 3 Projects */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {otherProjects.map((project, index) => (
+          {initialProjects.map((project, index) => (
             <ProjectCard 
               key={project.id} 
               project={project} 
@@ -191,8 +194,39 @@ const WorkSection = () => {
           ))}
         </div>
 
+        {/* Remaining Projects - Hidden until View More */}
+        <div 
+          className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 overflow-hidden transition-all duration-700 ease-out ${
+            showAll ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          {remainingProjects.map((project, index) => (
+            <ProjectCard 
+              key={project.id} 
+              project={project} 
+              index={index + 3} 
+              isVisible={isVisible && showAll} 
+            />
+          ))}
+        </div>
+
+        {/* View More Button */}
+        {!showAll && remainingProjects.length > 0 && (
+          <div className="mt-10 text-center">
+            <Button 
+              variant="heroOutline" 
+              size="lg"
+              onClick={() => setShowAll(true)}
+              className="group"
+            >
+              View More Projects
+              <ChevronDown className="ml-2 h-4 w-4 group-hover:translate-y-1 transition-transform" />
+            </Button>
+          </div>
+        )}
+
         {/* External link */}
-        <div className="mt-10 text-center">
+        <div className={`mt-10 text-center transition-all duration-500 ${showAll ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
           <Button variant="ghost" asChild>
             <a 
               href="https://vimeo.com/user/mahimakumar" 
