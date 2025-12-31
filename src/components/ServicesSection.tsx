@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Video, Wand2, Palette, Sparkles, Film, Layers } from "lucide-react";
+import { Video, Wand2, Globe, Film, Layers, Sparkles } from "lucide-react";
 
 const services = [
   {
@@ -13,9 +13,9 @@ const services = [
     description: "Dynamic motion graphics and animated visuals that bring brands to life. From logo animations to full explainer videos using After Effects."
   },
   {
-    icon: Palette,
-    title: "Visual Effects",
-    description: "Creative VFX compositing and enhancement to add that extra polish and cinematic quality to your video projects."
+    icon: Globe,
+    title: "Website with AI",
+    description: "AI-powered websites with smart layouts, modern UX, and automation. Built using cutting-edge AI tools and no-code platforms for rapid deployment."
   },
   {
     icon: Film,

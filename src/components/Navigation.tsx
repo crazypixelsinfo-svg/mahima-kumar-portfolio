@@ -18,9 +18,8 @@ const Navigation = () => {
   const navLinks = [
     { label: "About", href: "#about" },
     { label: "Services", href: "#services" },
+    { label: "AI Workflow", href: "#ai-workflow" },
     { label: "Work", href: "#work" },
-    { label: "Skills", href: "#skills" },
-    { label: "Experience", href: "#experience" },
     { label: "Contact", href: "#contact" },
   ];
 
