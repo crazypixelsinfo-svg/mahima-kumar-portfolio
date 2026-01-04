@@ -36,6 +36,10 @@ const ToolsSection = () => {
     { name: "Veed.io", description: "AI Video Editing & Captions" },
     { name: "Gemini", description: "Concept Generation" },
     { name: "Lovart.ai", description: "Design Inspiration" },
+    { name: "Midjourney", description: "AI Image Generation" },
+    { name: "Runway", description: "AI Video & Motion Effects" },
+    { name: "ElevenLabs", description: "AI Voice & Audio" },
+    { name: "Notion AI", description: "Workflow & Documentation" },
   ];
 
   return (
