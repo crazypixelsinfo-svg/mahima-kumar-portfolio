@@ -1,105 +1,51 @@
+import { ArrowRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Mail, Download, User } from "lucide-react";
 
 const HeroSection = () => {
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero grain overflow-hidden">
-      {/* Animated gradient orbs */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[hsl(var(--gradient-purple)/0.15)] rounded-full blur-3xl animate-glow-pulse" />
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[hsl(var(--gradient-blue)/0.1)] rounded-full blur-3xl animate-glow-pulse" style={{ animationDelay: "1s" }} />
-        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-[hsl(var(--gradient-teal)/0.08)] rounded-full blur-3xl animate-glow-pulse" style={{ animationDelay: "2s" }} />
-      </div>
+    <section className="min-h-screen flex items-center justify-center section-container">
+      <div className="w-full py-20 md:py-0">
+        <div className="space-y-8 max-w-3xl">
+          {/* Tagline */}
+          <p className="text-muted-foreground text-sm md:text-base tracking-wide uppercase">
+            Video Editor & Motion Graphics Designer
+          </p>
 
-      <div className="relative z-10 w-full px-6 max-w-6xl mx-auto">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-          {/* Text Content */}
-          <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
-            <p 
-              className="text-muted-foreground text-sm md:text-base tracking-[0.3em] uppercase mb-6 opacity-0 animate-fade-up"
-              style={{ animationDelay: "0.2s" }}
-            >
-              Creative Video Editor
-            </p>
-            
-            <h1 
-              className="font-display text-4xl md:text-6xl lg:text-7xl font-bold mb-6 opacity-0 animate-fade-up"
-              style={{ animationDelay: "0.4s" }}
-            >
-              <span className="text-gradient">Bellamkonda Mahima Kumar</span>
-            </h1>
-            
-            <p 
-              className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed opacity-0 animate-fade-up"
-              style={{ animationDelay: "0.6s" }}
-            >
-              After Effects & Premiere Pro Specialist | Exploring AI Tools & Digital Marketing for Brand Growth
-            </p>
-            
-            <div 
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 opacity-0 animate-fade-up"
-              style={{ animationDelay: "0.8s" }}
-            >
-              <Button variant="hero" size="lg" asChild>
-                <a href="#work">
-                  View Work
-                  <ArrowDown className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="heroOutline" size="lg" asChild>
-                <a href="#contact">
-                  <Mail className="mr-2 h-4 w-4" />
-                  Contact Me
-                </a>
-              </Button>
-            </div>
+          {/* Name */}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight">
+            Bellamkonda
+            <br />
+            Mahima Kumar
+          </h1>
 
-            {/* Download Resume Button */}
-            <div 
-              className="mt-6 opacity-0 animate-fade-up flex justify-center lg:justify-start"
-              style={{ animationDelay: "1s" }}
+          {/* Subtitle */}
+          <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
+            Crafting stories through motion, visuals & creativity
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap gap-4 pt-4">
+            <Button
+              size="lg"
+              onClick={() => scrollToSection("portfolio")}
+              className="group"
             >
-              <Button variant="glow" size="lg" asChild>
-                <a href="/BMK_resume.pdf" download="Bellamkonda_Mahima_Kumar_Resume.pdf">
-                  <Download className="mr-2 h-4 w-4" />
-                  Download Resume
-                </a>
-              </Button>
-            </div>
+              View Portfolio
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => scrollToSection("contact")}
+            >
+              <Mail className="mr-2 h-4 w-4" />
+              Contact Me
+            </Button>
           </div>
-
-          {/* Portrait Placeholder */}
-          <div 
-            className="order-1 lg:order-2 opacity-0 animate-fade-up"
-            style={{ animationDelay: "0.5s" }}
-          >
-            <div className="relative">
-              {/* Glow effect behind portrait */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--gradient-purple)/0.4)] via-[hsl(var(--gradient-blue)/0.3)] to-[hsl(var(--gradient-teal)/0.4)] rounded-3xl blur-2xl scale-110" />
-              
-              {/* Portrait container */}
-              <div className="relative w-64 h-72 md:w-80 md:h-96 rounded-3xl bg-secondary/50 border border-border overflow-hidden backdrop-blur-sm">
-                {/* Placeholder content */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground/50">
-                  <User className="w-20 h-20 mb-4" />
-                  <p className="text-sm">Portrait Coming Soon</p>
-                </div>
-                
-                {/* Rim light effect */}
-                <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div 
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in"
-        style={{ animationDelay: "1.5s" }}
-      >
-        <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center">
-          <div className="w-1.5 h-3 bg-muted-foreground/50 rounded-full mt-2 animate-bounce" />
         </div>
       </div>
     </section>
