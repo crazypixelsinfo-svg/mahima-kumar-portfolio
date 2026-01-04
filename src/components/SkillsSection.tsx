@@ -1,16 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { 
-  Palette, 
-  Film, 
-  Box, 
-  Pencil, 
-  Layers,
-  Sparkles,
-  MessageSquare,
-  Video,
-  Lightbulb,
-  Image
-} from "lucide-react";
+import { Clapperboard, Box, Pencil, Video, Languages } from "lucide-react";
 
 const SkillsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -23,7 +12,7 @@ const SkillsSection = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.2 }
     );
 
     if (sectionRef.current) {
@@ -33,86 +22,75 @@ const SkillsSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const skillCategories = [
-    {
-      title: "Creative & Technical",
-      skills: [
-        { name: "Motion Graphics", icon: Sparkles },
-        { name: "Video Editing", icon: Film },
-        { name: "3D Modeling", icon: Box },
-        { name: "3D Set & Prop Design", icon: Layers },
-        { name: "Basic Sketching", icon: Pencil },
-      ]
-    },
-    {
-      title: "Software",
-      skills: [
-        { name: "Adobe After Effects", icon: Palette },
-        { name: "Adobe Premiere Pro", icon: Film },
-        { name: "Adobe Photoshop", icon: Image },
-        { name: "Adobe Illustrator", icon: Palette },
-        { name: "Blender", icon: Box },
-        { name: "Autodesk Maya", icon: Box },
-      ]
-    },
-    {
-      title: "AI Tools & Workflow",
-      skills: [
-        { name: "ChatGPT", icon: MessageSquare },
-        { name: "Veed.io", icon: Video },
-        { name: "Gemini", icon: Lightbulb },
-        { name: "Lovart.ai", icon: Sparkles },
-      ]
-    }
+  const skills = [
+    { name: "Motion Graphics", icon: Clapperboard },
+    { name: "Video Editing", icon: Video },
+    { name: "3D Modeling", icon: Box },
+    { name: "3D Set & Prop Design", icon: Box },
+    { name: "Basic Sketching", icon: Pencil },
   ];
 
+  const languages = ["English", "Telugu", "Hindi"];
+
   return (
-    <section 
+    <section
       ref={sectionRef}
-      id="skills" 
-      className="section-padding bg-card/50 grain"
+      id="skills"
+      className="section-spacing border-t border-border"
     >
-      <div className="max-w-6xl mx-auto">
-        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <p className="text-primary text-sm tracking-[0.3em] uppercase mb-4">Expertise</p>
-          <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-            Skills & Tools
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            A blend of creative expertise and technical proficiency
+      <div className="section-container">
+        <div
+          className={`transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <p className="text-sm text-muted-foreground uppercase tracking-wide mb-4">
+            Skills
           </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-12">
+            What I Do
+          </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {skillCategories.map((category, categoryIndex) => (
-            <div 
-              key={category.title}
-              className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-              style={{ transitionDelay: `${(categoryIndex + 1) * 200}ms` }}
+        {/* Skills Grid */}
+        <div
+          className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-16 transition-all duration-700 delay-200 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          {skills.map((skill, index) => (
+            <div
+              key={index}
+              className="group p-6 rounded-lg border border-border bg-card hover:border-foreground/20 transition-all duration-300"
             >
-              <div className="bg-secondary/30 border border-border rounded-2xl p-6 h-full glow-border card-hover">
-                <h3 className="font-display text-xl font-semibold mb-6 text-gradient">
-                  {category.title}
-                </h3>
-                <div className="space-y-4">
-                  {category.skills.map((skill) => {
-                    const IconComponent = skill.icon;
-                    return (
-                      <div 
-                        key={skill.name}
-                        className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors duration-200"
-                      >
-                        <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-                          <IconComponent className="w-4 h-4 text-primary" />
-                        </div>
-                        <span className="text-sm">{skill.name}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+              <skill.icon className="h-6 w-6 mb-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+              <p className="text-sm font-medium">{skill.name}</p>
             </div>
           ))}
+        </div>
+
+        {/* Languages */}
+        <div
+          className={`transition-all duration-700 delay-300 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <Languages className="h-5 w-5 text-muted-foreground" />
+            <p className="text-sm text-muted-foreground uppercase tracking-wide">
+              Languages
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {languages.map((lang, index) => (
+              <span
+                key={index}
+                className="px-4 py-2 rounded-full border border-border text-sm"
+              >
+                {lang}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
