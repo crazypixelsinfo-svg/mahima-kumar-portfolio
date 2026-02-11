@@ -12,7 +12,7 @@ const ExperienceSection = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -30,85 +30,94 @@ const ExperienceSection = () => {
       current: true,
       responsibilities: [
         "Created motion graphics and short video ads",
-        "Edited reels and promo videos",
-        "Used AI tools to speed up workflows",
-      ],
+        "Edited reels and promotional videos",
+        "Used AI tools to optimize editing workflow",
+      ]
     },
     {
       title: "Freelance Animator / Motion Designer",
-      company: "Self-Employed",
-      period: "2023 – Present",
+      company: "Independent",
+      period: "2024 – Present",
       current: false,
       responsibilities: [
-        "Animated explainer videos, logo animations, and social media content",
-        "Designed brand-based motion graphics",
+        "Worked with private clients on explainer videos, logo animations, and social media content",
+        "Delivered paid projects under deadlines",
         "Managed client feedback and revisions",
-        "Delivered paid projects on deadlines",
-      ],
-    },
+      ]
+    }
   ];
 
   return (
-    <section
+    <section 
       ref={sectionRef}
-      id="experience"
-      className="section-spacing border-t border-border"
+      id="experience" 
+      className="section-padding"
     >
-      <div className="section-container">
-        <div
-          className={`transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          <p className="text-sm text-muted-foreground uppercase tracking-wide mb-4">
+      <div className="max-w-4xl mx-auto">
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <p className="text-primary text-sm tracking-[0.3em] uppercase mb-4">Career</p>
+          <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
             Experience
-          </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-12">
-            Work History
           </h2>
+          <p className="text-muted-foreground max-w-xl mx-auto">
+            Professional journey in motion graphics and video editing
+          </p>
         </div>
 
-        <div className="space-y-8">
+        {/* Timeline */}
+        <div className="relative">
+          {/* Timeline line */}
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border md:-translate-x-1/2" />
+
           {experiences.map((exp, index) => (
-            <div
+            <div 
               key={index}
-              className={`p-6 md:p-8 rounded-lg border border-border bg-card transition-all duration-700 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: `${200 + index * 100}ms` }}
+              className={`relative mb-12 last:mb-0 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+              style={{ transitionDelay: `${(index + 1) * 200}ms` }}
             >
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <Briefcase className="h-5 w-5 text-muted-foreground" />
-                    <h3 className="text-xl font-semibold">{exp.title}</h3>
+              <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-12 md:ml-0' : 'md:pl-12 md:ml-auto'}`}>
+                {/* Timeline dot */}
+                <div className={`absolute left-0 md:left-1/2 w-4 h-4 rounded-full border-2 ${exp.current ? 'bg-primary border-primary' : 'bg-background border-border'} md:-translate-x-1/2 -translate-x-1/2`}>
+                  {exp.current && (
+                    <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-50" />
+                  )}
+                </div>
+
+                {/* Content card */}
+                <div className="ml-6 md:ml-0 bg-secondary/30 border border-border rounded-2xl p-6 glow-border card-hover">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+                      <Briefcase className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-display text-xl font-semibold">{exp.title}</h3>
+                      <p className="text-primary">{exp.company}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-2 text-muted-foreground text-sm mb-4">
+                    <Calendar className="w-4 h-4" />
+                    <span>{exp.period}</span>
                     {exp.current && (
-                      <span className="px-2 py-1 text-xs rounded-full bg-foreground text-background">
+                      <span className="px-2 py-0.5 rounded-full bg-primary/20 text-primary text-xs font-medium">
                         Current
                       </span>
                     )}
                   </div>
-                  <p className="text-muted-foreground">{exp.company}</p>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Calendar className="h-4 w-4" />
-                  {exp.period}
+
+                  <ul className="space-y-2">
+                    {exp.responsibilities.map((item, itemIndex) => (
+                      <li 
+                        key={itemIndex}
+                        className="flex items-start gap-2 text-muted-foreground text-sm"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
-
-              <ul className="space-y-2 mt-4">
-                {exp.responsibilities.map((resp, i) => (
-                  <li
-                    key={i}
-                    className="text-muted-foreground text-sm flex items-start gap-2"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground mt-2 flex-shrink-0" />
-                    {resp}
-                  </li>
-                ))}
-              </ul>
             </div>
           ))}
         </div>
