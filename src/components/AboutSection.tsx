@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
-const AboutSection = () => {
+interface AboutSectionProps {
+  compact?: boolean;
+}
+
+const AboutSection = ({ compact }: AboutSectionProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -25,7 +29,7 @@ const AboutSection = () => {
     <section 
       ref={sectionRef}
       id="about" 
-      className="section-padding bg-card/50 grain min-h-screen flex items-center"
+      className={`section-padding bg-card/50 grain ${compact ? '' : 'min-h-screen'} flex items-center`}
     >
       <div className="max-w-4xl mx-auto w-full">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
@@ -43,16 +47,22 @@ const AboutSection = () => {
             Jawaharlal Nehru Architecture and Fine Arts University, specializing in animation, video graphics, 
             interactive technology, and visual effects.
           </p>
-          <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
-            Currently working as a Motion Graphics & Video Editor at SocioShout, I create 
-            brand-focused visuals that captivate audiences and drive engagement. My toolkit includes 
-            After Effects, Premiere Pro, and cutting-edge AI tools that streamline creative workflows.
-          </p>
-          <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
-            What drives me is the art of visual storytelling. Every frame, every transition, 
-            every effect is crafted with intention to create memorable experiences that resonate 
-            with viewers and achieve client objectives.
-          </p>
+          
+          {!compact && (
+            <>
+              <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
+                Currently working as a Motion Graphics & Video Editor at SocioShout, I create 
+                brand-focused visuals that captivate audiences and drive engagement. My toolkit includes 
+                After Effects, Premiere Pro, and cutting-edge AI tools that streamline creative workflows.
+              </p>
+              <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
+                What drives me is the art of visual storytelling. Every frame, every transition, 
+                every effect is crafted with intention to create memorable experiences that resonate 
+                with viewers and achieve client objectives.
+              </p>
+            </>
+          )}
+          
           <p className="text-foreground/90 text-lg md:text-xl leading-relaxed font-medium">
             Passionate about impactful visuals, storytelling, and AI-assisted creative workflows.
           </p>
