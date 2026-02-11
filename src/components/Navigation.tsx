@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
-import logoImg from "@/assets/logo.png";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,8 +34,8 @@ const Navigation = () => {
     >
       <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center">
-            <img src={logoImg} alt="BMK" className="h-10 w-auto" />
+          <Link to="/" className="font-display text-xl font-bold text-gradient">
+            BMK
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
