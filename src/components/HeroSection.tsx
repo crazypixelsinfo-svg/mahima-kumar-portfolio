@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Mail, Download, User } from "lucide-react";
+import { ArrowDown, Mail, Download } from "lucide-react";
+import { Link } from "react-router-dom";
+import logoImg from "@/assets/logo.png";
+import portraitImg from "@/assets/portrait.png";
 
 const HeroSection = () => {
   return (
@@ -15,49 +18,43 @@ const HeroSection = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
           {/* Text Content */}
           <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
-            <p 
-              className="text-muted-foreground text-sm md:text-base tracking-[0.3em] uppercase mb-6 opacity-0 animate-fade-up"
+            {/* Logo */}
+            <div 
+              className="mb-6 opacity-0 animate-fade-up flex justify-center lg:justify-start"
               style={{ animationDelay: "0.2s" }}
             >
-              Creative Video Editor
-            </p>
-            
-            <h1 
-              className="font-display text-4xl md:text-6xl lg:text-7xl font-bold mb-6 opacity-0 animate-fade-up"
-              style={{ animationDelay: "0.4s" }}
-            >
-              <span className="text-gradient">Bellamkonda Mahima Kumar</span>
-            </h1>
+              <img src={logoImg} alt="BMK Logo" className="h-16 md:h-20 w-auto" />
+            </div>
             
             <p 
               className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed opacity-0 animate-fade-up"
-              style={{ animationDelay: "0.6s" }}
+              style={{ animationDelay: "0.5s" }}
             >
               After Effects & Premiere Pro Specialist | Exploring AI Tools & Digital Marketing for Brand Growth
             </p>
             
             <div 
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 opacity-0 animate-fade-up"
-              style={{ animationDelay: "0.8s" }}
+              style={{ animationDelay: "0.7s" }}
             >
               <Button variant="hero" size="lg" asChild>
-                <a href="#work">
+                <Link to="/works">
                   View Work
                   <ArrowDown className="ml-2 h-4 w-4" />
-                </a>
+                </Link>
               </Button>
               <Button variant="heroOutline" size="lg" asChild>
-                <a href="#contact">
+                <Link to="/contact">
                   <Mail className="mr-2 h-4 w-4" />
                   Contact Me
-                </a>
+                </Link>
               </Button>
             </div>
 
             {/* Download Resume Button */}
             <div 
               className="mt-6 opacity-0 animate-fade-up flex justify-center lg:justify-start"
-              style={{ animationDelay: "1s" }}
+              style={{ animationDelay: "0.9s" }}
             >
               <Button variant="glow" size="lg" asChild>
                 <a href="/BMK_resume.pdf" download="Bellamkonda_Mahima_Kumar_Resume.pdf">
@@ -68,24 +65,19 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Portrait Placeholder */}
+          {/* Portrait */}
           <div 
             className="order-1 lg:order-2 opacity-0 animate-fade-up"
-            style={{ animationDelay: "0.5s" }}
+            style={{ animationDelay: "0.4s" }}
           >
             <div className="relative">
-              {/* Glow effect behind portrait */}
               <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--gradient-purple)/0.4)] via-[hsl(var(--gradient-blue)/0.3)] to-[hsl(var(--gradient-teal)/0.4)] rounded-3xl blur-2xl scale-110" />
-              
-              {/* Portrait container */}
-              <div className="relative w-64 h-72 md:w-80 md:h-96 rounded-3xl bg-secondary/50 border border-border overflow-hidden backdrop-blur-sm">
-                {/* Placeholder content */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground/50">
-                  <User className="w-20 h-20 mb-4" />
-                  <p className="text-sm">Portrait Coming Soon</p>
-                </div>
-                
-                {/* Rim light effect */}
+              <div className="relative w-64 h-72 md:w-80 md:h-96 rounded-3xl overflow-hidden border border-border">
+                <img 
+                  src={portraitImg} 
+                  alt="Bellamkonda Mahima Kumar" 
+                  className="w-full h-full object-cover"
+                />
                 <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
               </div>
             </div>
