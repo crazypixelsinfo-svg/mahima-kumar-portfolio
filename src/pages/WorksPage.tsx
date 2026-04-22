@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import WorkSection from "@/components/WorkSection";
+import PostersSection from "@/components/PostersSection";
 
 const WorksPage = () => {
   return (
@@ -10,6 +11,7 @@ const WorksPage = () => {
       </Helmet>
       <div className="pt-20">
         <WorkSection showAll />
+        <PostersSection />
       </div>
     </>
   );
