@@ -26,6 +26,8 @@ const projects: Project[] = [
   { id: "11", vimeoId: "1164043465" },
   { id: "12", vimeoId: "1164043878" },
   { id: "13", vimeoId: "1164042406" },
+  { id: "14", vimeoId: "1172470449" },
+  { id: "15", vimeoId: "1172470568" },
 ];
 
 const ProjectCard = ({ project, index, isVisible }: { project: Project; index: number; isVisible: boolean }) => {
