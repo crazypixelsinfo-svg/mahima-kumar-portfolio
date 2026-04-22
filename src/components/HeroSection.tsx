@@ -74,7 +74,7 @@ const HeroSection = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--gradient-purple)/0.4)] via-[hsl(var(--gradient-blue)/0.3)] to-[hsl(var(--gradient-teal)/0.4)] rounded-3xl blur-2xl scale-110" />
               <div className="relative w-64 h-72 md:w-80 md:h-96 rounded-3xl overflow-hidden border border-border">
-                <img src={portraitImg} alt="Bellamkonda Mahima Kumar" className="w-full h-full object-cover" />
+                <img src={portraitImg} alt="Bellamkonda Mahima Kumar – Creative Video Editor and Motion Graphics Designer" className="w-full h-full object-cover" loading="eager" />
                 <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
               </div>
             </div>
