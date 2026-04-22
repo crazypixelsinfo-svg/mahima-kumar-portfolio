@@ -5,6 +5,7 @@ import WorkSection from "@/components/WorkSection";
 import PostersSection from "@/components/PostersSection";
 import SkillsSection from "@/components/SkillsSection";
 import ContactSection from "@/components/ContactSection";
+import JsonLd from "@/components/JsonLd";
 
 const Index = () => {
   return (
@@ -15,9 +16,12 @@ const Index = () => {
           name="description" 
           content="Creative Video Editor specializing in After Effects and Premiere Pro. BFA Animation graduate exploring AI tools and digital marketing for brand growth." 
         />
+        <link rel="canonical" href="https://mahimakumarportfolio.lovable.app/" />
         <meta property="og:title" content="Bellamkonda Mahima Kumar | Creative Video Editor" />
+        <meta property="og:url" content="https://mahimakumarportfolio.lovable.app/" />
         <meta property="og:type" content="website" />
       </Helmet>
+      <JsonLd page="home" />
 
       <HeroSection />
       <AboutSection compact />
