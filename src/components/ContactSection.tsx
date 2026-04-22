@@ -5,6 +5,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, MapPin, Linkedin, Send, CheckCircle, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(2, "Name must be at least 2 characters").max(100, "Name must be less than 100 characters"),
+  email: z.string().trim().email("Please enter a valid email address").max(255, "Email must be less than 255 characters"),
+  message: z.string().trim().min(10, "Message must be at least 10 characters").max(2000, "Message must be less than 2000 characters"),
+});
 
 interface ContactSectionProps {
   compact?: boolean;
@@ -14,6 +21,7 @@ const ContactSection = ({ compact }: ContactSectionProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const sectionRef = useRef<HTMLElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
@@ -33,7 +41,26 @@ const ContactSection = ({ compact }: ContactSectionProps) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus("idle");
+    setFieldErrors({});
+
     const formData = new FormData(e.currentTarget);
+    const raw = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      message: formData.get("message") as string,
+    };
+
+    const result = contactSchema.safeParse(raw);
+    if (!result.success) {
+      const errors: Record<string, string> = {};
+      result.error.errors.forEach((err) => {
+        if (err.path[0]) errors[err.path[0] as string] = err.message;
+      });
+      setFieldErrors(errors);
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const response = await fetch("https://formspree.io/f/myklbwoa", {
         method: "POST",
