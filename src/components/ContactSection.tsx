@@ -125,16 +125,19 @@ const ContactSection = ({ compact }: ContactSectionProps) => {
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-foreground">Full Name</Label>
-                  <Input id="name" name="name" type="text" required placeholder="Your name" className="bg-background/50 border-border focus:border-primary/50 focus:ring-primary/20 transition-all" />
+                  <Input id="name" name="name" type="text" required maxLength={100} placeholder="Your name" className="bg-background/50 border-border focus:border-primary/50 focus:ring-primary/20 transition-all" />
+                  {fieldErrors.name && <p className="text-sm text-destructive">{fieldErrors.name}</p>}
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-foreground">Email Address</Label>
-                  <Input id="email" name="email" type="email" required placeholder="your@email.com" className="bg-background/50 border-border focus:border-primary/50 focus:ring-primary/20 transition-all" />
+                  <Input id="email" name="email" type="email" required maxLength={255} placeholder="your@email.com" className="bg-background/50 border-border focus:border-primary/50 focus:ring-primary/20 transition-all" />
+                  {fieldErrors.email && <p className="text-sm text-destructive">{fieldErrors.email}</p>}
                 </div>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="message" className="text-foreground">Message</Label>
-                <Textarea id="message" name="message" required placeholder="Tell me about your project..." rows={5} className="bg-background/50 border-border focus:border-primary/50 focus:ring-primary/20 transition-all resize-none" />
+                <Textarea id="message" name="message" required maxLength={2000} placeholder="Tell me about your project..." rows={5} className="bg-background/50 border-border focus:border-primary/50 focus:ring-primary/20 transition-all resize-none" />
+                {fieldErrors.message && <p className="text-sm text-destructive">{fieldErrors.message}</p>}
               </div>
               {submitStatus === "success" && (
                 <div className="flex items-center gap-2 text-green-400 bg-green-400/10 border border-green-400/20 rounded-lg p-4">
